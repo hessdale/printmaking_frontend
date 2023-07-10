@@ -23,6 +23,7 @@ import cookies from "vue-cookies";
                     }
                 }).then((response)=>{
                     cookies.set("token",response.data[0].token)
+                    this.$router.go()
                     console.log(response);
                 }).catch((error)=>{
                     console.log(error);

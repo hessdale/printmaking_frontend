@@ -1,35 +1,40 @@
 <template>
     <div>
-<input type="file" ref="uploadfile" required>
 <input type="text" placeholder="title" ref="title">
 <input type="text" placeholder="name" ref="name">
-<input type="date" placeholder="Date (yyyy-mm-dd)" ref="date" required>
+<input type="text" placeholder="Date (yyyy-mm-dd)" ref="date">
 <input type="text" placeholder="publication" ref="publication">
-<input type="text" placeholder="block ID" ref="block_id" required>
-<input type="text" placeholder="cliffnotes" ref="cliffnotes" required>
-<textarea name="info" id="info" cols="60" rows="30"></textarea>
+<input type="text" placeholder="block ID" ref="block_id">
+<input type="text" placeholder="cliffnotes" ref="cliffnotes">
+<textarea name="info" ref="info" cols="60" rows="30"></textarea>
 <button @click="post_block">POST</button>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
+import cookies from 'vue-cookies';
     export default {
         methods: {
+            
             post_block() {
-                // let title_input = this.$refs.title[`value`]
-                // let name_input = this.$refs.name[`value`]
-                // let date_input = this.$refs.date[`value`]
-                // let publication_input = this.$refs.publication[`value`]
-                // let block_id_input = this.$refs.block_id[`value`]
-                // let cliffnotes_input = this.$refs.cliffnotes[`value`]
-                // let info_input = this.$refs.info[`value`]
+                let form = new FormData()
+                form.append("title", this.$refs["title"].value);
+                form.append("name", this.$refs["name"].value);
+                form.append("date", this.$refs["date"].value);
+                form.append("publication", this.$refs["publication"].value);
+                form.append("block_id", this.$refs["block_id"].value);
+                form.append("cliff_notes", this.$refs["cliffnotes"].value);
+                form.append("info", this.$refs["info"].value);
+                let cookie_token = cookies.get("token")
                 axios.request({
-                    url:`${process.env.VUE_APP_BASE_DOMAIN}/api/login-admin`,
+                    url:`${process.env.VUE_APP_BASE_DOMAIN}/api/blocks`,
                     method:`POST`,
-                    data:{
-                   
-                    }
+                    headers:{
+                        token:cookie_token,
+                        "Content-Type": "multipart/form-data",
+                    },
+                    data:form,
                 }).then((response)=>{
                  
                     console.log(response);
