@@ -24,7 +24,6 @@ div{
     display: grid;
     justify-items: center;
     align-items: center;
-
 }
 article{
     margin-top: 50px;
