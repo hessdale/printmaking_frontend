@@ -15,7 +15,7 @@ import cookies from "vue-cookies";
                 let username_input = this.$refs.username[`value`]
                 let password_input = this.$refs.password[`value`]
                 axios.request({
-                    url:`${process.env.VUE_APP_BASE_URL}/api/login-admin`,
+                    url:`${process.env.VUE_APP_BASE_DOMAIN}/api/login-admin`,
                     method:`POST`,
                     data:{
                         username:username_input,
