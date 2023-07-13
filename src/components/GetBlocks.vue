@@ -3,7 +3,7 @@
         <article v-for="(block,i) in blocks" :key="i">
             <h3>{{ block[`title`] }}</h3>
             <p>{{ block[`cliff_notes`] }}</p>
-            <!-- <img src="C:\Users\eleme\Desktop\Desktop\Innotech\Assignments\Week23\printmaking\images\83a5672b1ae54afe812c60d8895e251b.jpeg" alt="" width="200px"> -->
+            <img :src='getImageUrl(block[`file`])' :alt="block[`image_description`]" width="200px">
         </article>
     </div>
 </template>
@@ -17,30 +17,42 @@ import axios from 'axios';
                 images:undefined,
             }
         },
+        methods: {
+            joinArrays(arr1,arr2) {
+                for (let i = 0; i < arr2.length; i++) {
+                    for (let index = 0; index < arr1.length; index++) {
+                        if(arr1[index].block_id == arr2[i].blockid){
+                            arr1[i].concat(arr2[i])
+                        }
+                }
+                }
+                this.blocks=arr1
+            },
+            getImageUrl(img){
+                let new_image=require("../assets/"+img)
+                return new_image
+            }
+        },
         mounted () {
             axios.request({
             url:`${process.env.VUE_APP_BASE_DOMAIN}/api/blocks`,
             method:`GET`
             }).then((response)=>{
-                console.log(response)
                 this.blocks=response.data
+                axios.request({
+                    url:`${process.env.VUE_APP_BASE_DOMAIN}/api/images`,
+                    method:`GET`
+                }).then((response)=>{
+                    this.images=response.data
+                    this.joinArrays(this.blocks,this.images);
+                }).catch((error)=>{
+                    console.log(error)
+                });
             }).catch((error)=>{
                 console.log(error)
             });
-            axios.request({
-            url:`${process.env.VUE_APP_BASE_DOMAIN}/api/images`,
-            method:`GET`
-            }).then((response)=>{
-                console.log(response)
-                this.images=response.data
-            }).catch((error)=>{
-                console.log(error)
-            });
-            for (let i = 0; i < this.images.length; i++) {
-                    if(this.blocks[i].block_id == this.images[i].blockid){
-                        this.blocks[i].concat(this.images[i])
-                    }
-                }
+            
+            
         },
     }
 </script>
