@@ -5,6 +5,7 @@ import AdminView from '../views/AdminView.vue'
 import ARView from '../views/ARView.vue'
 import BlocksView from '../views/BlocksView.vue'
 import AboutView from '../views/AboutView.vue'
+import BlockView from '../views/BlockView.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/about',
     name: 'about',
     component: AboutView
+  },
+  {
+    path:'/block/:block_id',
+    name:'block',
+    component:BlockView
   }
 ]
 
