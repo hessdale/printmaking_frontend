@@ -36,9 +36,9 @@ const routes = [
     component: AboutView
   },
   {
-    path:'/block/:block_id',
-    name:'block',
-    component:BlockView
+    path: '/block/:block_id',
+    name: 'block',
+    component: BlockView
   }
 ]
 
