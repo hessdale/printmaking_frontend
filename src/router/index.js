@@ -7,6 +7,7 @@ import BlocksView from '../views/BlocksView.vue'
 import AboutView from '../views/AboutView.vue'
 import BlockView from '../views/BlockView.vue'
 import SearchView from '../views/SearchView.vue'
+import ContactView from '../views/ContactView.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/search/:search_params',
     name: 'search',
     component: SearchView
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: ContactView
   }
 ]
 
