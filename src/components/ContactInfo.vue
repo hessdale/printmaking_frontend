@@ -3,11 +3,11 @@
     <h2>Contact Us</h2>
     <div>
       <label for="email">Email:</label>
-      <input type="email" id="email" v-model="email" />
+      <input type="email" id="email" ref="email" />
       <label for="block-id">Block ID:</label>
-      <input type="text" id="block-id" v-model="blockId" />
+      <input type="text" id="block-id" ref="blockId" />
       <label for="name">Name:</label>
-      <input type="text" id="name" v-model="name" />
+      <input type="text" id="name" ref="name" />
       <label for="question">Question:</label>
       <textarea id="question"></textarea>
     </div>
