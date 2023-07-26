@@ -29,7 +29,7 @@ export default {
       router.push({ name: "block", params: { block_id } });
     },
     getImageUrl(img) {
-      let new_image = require("../assets/" + img);
+      let new_image = require("../../../printmaking/images/" + img);
       return new_image;
     },
   },

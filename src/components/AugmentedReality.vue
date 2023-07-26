@@ -1,35 +1,18 @@
 <template>
   <div>
     <div ref="canvasZone">
-      <canvas ref="renderCanvas" width="500" height="500"></canvas>
+      <canvas ref="renderCanvas" width="800" height="800"></canvas>
     </div>
   </div>
 </template>
 
 <script>
 import mosaicScene from "@/assets/js/mosaic_1";
-// import { onMounted } from "vue";
 
-// export default {
-//   mounted() {
-//     onMounted(() => {
-//       this.loadScene();
-//     });
-//   },
-//   methods: {
-//     async loadScene() {
-//       let canvas = this.$refs.renderCanvas;
-//       let assetInput = "/3d_assets/mini_mosaic_2.gltf";
-//       if (canvas) {
-//         await mosaicScene(canvas, assetInput);
-//       }
-//     },
-//   },
-// };
 export default {
   mounted() {
     let canvas = this.$refs.renderCanvas;
-    let assetInput = "/3d_assets/mini_mosaic_2.gltf";
+    let assetInput = "mini_mosaic_2.gltf";
     if (canvas) {
       mosaicScene(canvas, assetInput);
     }
