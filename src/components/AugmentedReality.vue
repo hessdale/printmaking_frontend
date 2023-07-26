@@ -7,12 +7,12 @@
 </template>
 
 <script>
-import { createScene } from "../babylon_scenes/mosaic_1";
+import mosaicScene from "/src/assets/js/mosaic_1.js";
 export default {
   mounted() {
-    let canvas = this.$refs("renderCanvas");
+    let canvas = this.$refs.renderCanvas;
     if (canvas) {
-      createScene(canvas, "mini_mosaic_2.gltf");
+      mosaicScene(canvas, "mini_mosaic_2.gltf");
     }
   },
 };

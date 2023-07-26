@@ -1,77 +1,69 @@
-import { Engine, Scene, DeviceOrientationCamera, Vector3, HemisphericLight, SceneLoader, } from "@babylonjs/core";
-//Engine, Scene, DeviceOrientationCamera, Vector3, HemisphericLight, SceneLoader, 
+import { Engine, Scene, DeviceOrientationCamera, Vector3, HemisphericLight, SceneLoader } from "@babylonjs/core";
 
+function mosaicScene(canvas_input, asset_input) {
+    let engine = null;
+    let scene = null;
 
-let createScene = (canvas_input, asset_input) => {
-    let canvas = canvas_input;
-    let engine = new Engine(canvas);
-    let sceneToRender = null;
+    async function createScene(canvas_input, asset_input) {
+        let canvas = canvas_input;
+        engine = new Engine(canvas_input);
+        scene = new Scene(engine);
 
-    //INSERT scene creation?
-    let scene = new Scene(engine);
+        let camera = new DeviceOrientationCamera("DevOr_camera", new Vector3(0, 0, 1.1), scene);
+        camera.setTarget(Vector3.Zero());
+        camera.attachControl(canvas, true);
 
-    /********** DEVICE ORIENTATION CAMERA EXAMPLE **************************/
+        new HemisphericLight("light", Vector3.Up(), scene);
 
-    // This creates and positions a device orientation camera 	
-    let camera = new DeviceOrientationCamera("DevOr_camera", new Vector3(0, 0, 1.1), scene);
+        await SceneLoader.LoadAssetContainer("/public/3d_assets", asset_input, scene, function (container) {
+            container.addAllToScene();
+        });
 
-    // This targets the camera to scene origin
-    camera.setTarget(new Vector3(0, 0, 1));
+        startRenderLoop();
+    }
 
-    // This attaches the camera to the canvas
-    camera.attachControl(canvas, true);
-    /**************************************************************/
-
-    // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    // let light = new HemisphericLight("light", new Vector3(0, 1, 0), scene);
-
-    //import local gltf
-    SceneLoader.LoadAssetContainer("/images/", asset_input, scene, function (container) {
-        const meshes = container.meshes;
-        const materials = container.materials;
-        //...
-
-        // Adds all elements to the scene
-        container.addAllToScene();
-
-    });
-    //took out because of assigned value but never used
-    // let ground = Mesh.CreateGround("ground1", 10, 10, 2, scene);
-
-    //?? might go to end of createScene
-    let startRenderLoop = function (engine, canvas) {
-        engine.runRenderLoop(function () {
-            if (sceneToRender && sceneToRender.activeCamera) {
-                sceneToRender.render();
+    function startRenderLoop() {
+        engine.runRenderLoop(() => {
+            if (scene && scene.activeCamera) {
+                scene.render();
             }
         });
     }
 
-    window.initFunction = async function () {
+    function initFunction() {
+        try {
+            // Perform any additional setup if needed (e.g., setting up options, rendering pipeline, etc.)
+            // ...
 
-
-
-        let asyncEngineCreation = async function () {
-            try {
-                return createDefaultEngine();
-            } catch (e) {
-                console.log("the available createEngine function failed. Creating the default engine instead");
-                return createDefaultEngine();
-            }
+            startRenderLoop();
+        } catch (e) {
+            console.log("Failed to initialize the custom engine. Falling back to the default engine.");
+            // You may want to add fallback logic or additional error handling here if necessary
+            engine = new Engine(canvas_input); // Create a new instance of the Engine class as a fallback
+            startRenderLoop();
         }
 
-        window.engine = await asyncEngineCreation();
-        if (!engine) throw 'engine should not be null.';
-        startRenderLoop(engine, canvas);
-        window.scene = createScene();
-    };
-    initFunction().then(() => {
-        sceneToRender = scene
-    });
+        if (!engine) {
+            throw 'Engine should not be null.';
+        }
+    }
 
-    // Resize
-    window.addEventListener("resize", function () {
+    function resizeHandler() {
         engine.resize();
-    });
+    }
+
+    function setup(canvas) {
+        initFunction();
+        createScene(canvas, asset_input);
+        window.addEventListener("resize", resizeHandler);
+    }
+
+    // Call the setup function and return any functions or values you want to expose
+    setup(canvas_input);
+
+    return {
+        // Return any functions or values you want to expose
+    };
 }
-export { createScene }
+
+export default mosaicScene;
