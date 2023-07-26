@@ -7,13 +7,23 @@
 </template>
 
 <script>
-import mosaicScene from "/src/assets/js/mosaic_1.js";
+import mosaicScene from "@/assets/js/mosaic_1";
+import { onMounted } from "vue";
+
 export default {
   mounted() {
-    let canvas = this.$refs.renderCanvas;
-    if (canvas) {
-      mosaicScene(canvas, "mini_mosaic_2.gltf");
-    }
+    onMounted(() => {
+      this.loadScene();
+    });
+  },
+  methods: {
+    async loadScene() {
+      let canvas = this.$refs.renderCanvas;
+      let assetInput = "/3d_assets/mini_mosaic_2.gltf";
+      if (canvas) {
+        await mosaicScene(canvas, assetInput);
+      }
+    },
   },
 };
 </script>
