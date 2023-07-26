@@ -8,22 +8,31 @@
 
 <script>
 import mosaicScene from "@/assets/js/mosaic_1";
-import { onMounted } from "vue";
+// import { onMounted } from "vue";
 
+// export default {
+//   mounted() {
+//     onMounted(() => {
+//       this.loadScene();
+//     });
+//   },
+//   methods: {
+//     async loadScene() {
+//       let canvas = this.$refs.renderCanvas;
+//       let assetInput = "/3d_assets/mini_mosaic_2.gltf";
+//       if (canvas) {
+//         await mosaicScene(canvas, assetInput);
+//       }
+//     },
+//   },
+// };
 export default {
   mounted() {
-    onMounted(() => {
-      this.loadScene();
-    });
-  },
-  methods: {
-    async loadScene() {
-      let canvas = this.$refs.renderCanvas;
-      let assetInput = "/3d_assets/mini_mosaic_2.gltf";
-      if (canvas) {
-        await mosaicScene(canvas, assetInput);
-      }
-    },
+    let canvas = this.$refs.renderCanvas;
+    let assetInput = "/3d_assets/mini_mosaic_2.gltf";
+    if (canvas) {
+      mosaicScene(canvas, assetInput);
+    }
   },
 };
 </script>

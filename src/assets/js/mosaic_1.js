@@ -1,10 +1,11 @@
 console.log("mosaicScene function called");
 import { Engine, Scene, DeviceOrientationCamera, Vector3, HemisphericLight, SceneLoader } from "@babylonjs/core";
+import "@babylonjs/loaders";
 
 function mosaicScene(canvas_input, asset_input) {
     let engine = null;
     let scene = null;
-
+    asset_input;
     async function createScene() {
         console.log("Creating scene...");
         engine = new Engine(canvas_input);
@@ -18,13 +19,13 @@ function mosaicScene(canvas_input, asset_input) {
 
         // Load the GLTF file using the imported path
         console.log("Loading GLTF file...");
-        await SceneLoader.LoadAssetContainer("", asset_input, scene,
+        await SceneLoader.LoadAssetContainer("/3d_assets/", "mini_mosaic_2.gltf", scene,
             function (container) {
                 container.addAllToScene();
                 startRenderLoop();
             },
             function (event) {
-                console.error("Error loading GLTF file:", event); // Add this line
+                console.error("Error loading GLTF file:", event);
             }
         );
     }
