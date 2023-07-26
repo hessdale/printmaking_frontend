@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Input for Admin to Log in -->
     <input type="text" placeholder="username" ref="username" />
     <input type="text" placeholder="password" ref="password" />
     <button @click="login">log in</button>
@@ -11,6 +12,7 @@ import axios from "axios";
 import cookies from "vue-cookies";
 export default {
   methods: {
+    //Function that posts a log in
     login() {
       let username_input = this.$refs.username[`value`];
       let password_input = this.$refs.password[`value`];

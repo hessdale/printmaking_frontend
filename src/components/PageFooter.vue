@@ -1,12 +1,13 @@
 <template>
   <div>
+    <!-- basic footer for info -->
     <div class="footer-content">
       <p>&copy; 2023</p>
       <p>
         For more information, visit our <a href="/about">About page</a> or
         <a href="/contact">contact us</a>.
       </p>
-      <p id="small">built by dale paul</p>
+      <p id="small">built by dale paul hess</p>
     </div>
   </div>
 </template>

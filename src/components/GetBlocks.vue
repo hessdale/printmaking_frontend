@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Looping through block data to display on page -->
     <article v-for="(block, i) in blocks" :key="i">
       <img
         :src="getImageUrl(block[`file`])"
@@ -24,16 +25,20 @@ export default {
       blocks: undefined,
     };
   },
+
   methods: {
+    //Function to send user to block page
     moreInfo(block_id) {
       router.push({ name: "block", params: { block_id } });
     },
+    //Function to get proper url path the images from the db back end
     getImageUrl(img) {
       let new_image = require("../../../printmaking/images/" + img);
       return new_image;
     },
   },
   mounted() {
+    //axios request to get all the blocks
     axios
       .request({
         url: `${process.env.VUE_APP_BASE_DOMAIN}/api/blocks`,

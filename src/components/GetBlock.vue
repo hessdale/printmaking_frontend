@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Loop through each image in the 'images' array and display them -->
     <article v-for="image in images" :key="image.id">
       <img
         :src="getImageUrl(image.file)"
@@ -24,12 +25,14 @@ export default {
     };
   },
   methods: {
+    //Function to get proper path for image url
     getImageUrl(img) {
-      let new_image = require("../assets/" + img);
+      let new_image = require("../../../printmaking/images/" + img);
       return new_image;
     },
   },
   mounted() {
+    // requests to get the appropriate block and info/images with it
     axios
       .request({
         url: `${process.env.VUE_APP_BASE_DOMAIN}/api/blocks_id`,

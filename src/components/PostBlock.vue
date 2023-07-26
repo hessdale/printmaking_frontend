@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Input form for Admin to post a new block -->
     <input type="text" placeholder="title" ref="title" />
     <input type="text" placeholder="name" ref="name" />
     <input type="text" placeholder="Date (yyyy-mm-dd)" ref="date" />
@@ -16,6 +17,7 @@ import axios from "axios";
 import cookies from "vue-cookies";
 export default {
   methods: {
+    //Function that appends a form and sends request to post new block
     post_block() {
       let form = new FormData();
       form.append("title", this.$refs["title"].value);

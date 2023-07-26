@@ -1,4 +1,5 @@
 <template>
+  <!-- BAsic info about project -->
   <div class="container">
     <img
       src="https://images.pexels.com/photos/16566150/pexels-photo-16566150/free-photo-of-old-artisan-showing-vintage-and-antique-artifacts-in-wooden-drawers.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

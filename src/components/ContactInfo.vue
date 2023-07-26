@@ -2,6 +2,7 @@
   <div class="contact-form">
     <h2>Contact Us</h2>
     <div>
+      <!-- Form for contact -->
       <label for="email">Email:</label>
       <input type="email" id="email" ref="email" />
       <label for="block-id">Block ID:</label>
@@ -18,6 +19,7 @@
   <script>
 export default {
   methods: {
+    // Will eventually have either db request for contact questions or email
     submitForm() {},
   },
 };

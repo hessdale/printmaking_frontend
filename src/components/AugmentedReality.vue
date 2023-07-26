@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- Canvas zone and renderCanvas for the mosaic_1.js file to display on -->
     <div ref="canvasZone">
       <canvas ref="renderCanvas" width="800" height="800"></canvas>
     </div>
@@ -11,6 +12,7 @@ import mosaicScene from "@/assets/js/mosaic_1";
 
 export default {
   mounted() {
+    // on mounted calls the mosaicScene function in mosaic_1.js if canvas is defined
     let canvas = this.$refs.renderCanvas;
     let assetInput = "mini_mosaic_2.gltf";
     if (canvas) {

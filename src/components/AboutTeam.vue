@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <!-- Basic info about project -->
     <img
       src="https://images.pexels.com/photos/4140925/pexels-photo-4140925.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       alt="planchest drawers open shoeing printmaking blocks"

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- display search results through loop -->
     <search-blocks></search-blocks>
     <article v-for="(block, i) in blocks" :key="i">
       <img
@@ -25,21 +26,25 @@ export default {
     SearchBlocks,
   },
   methods: {
+    //Using more info to push user to page about singular block
     moreInfo(block_id) {
       router.push({ name: "block", params: { block_id } });
     },
+    // building proper image url
     getImageUrl(img) {
-      let new_image = require("../assets/" + img);
+      let new_image = require("../../../printmaking/images/" + img);
       return new_image;
     },
   },
   data() {
+    //Getting search params from the url
     return {
       blocks: undefined,
       search_params: this.$route.params[`search_params`],
     };
   },
   mounted() {
+    //Request get to get results
     axios
       .request({
         url: `${process.env.VUE_APP_BASE_DOMAIN}/api/search`,
