@@ -8,13 +8,13 @@
 </template>
 
 <script>
-import mosaicScene from "@/assets/js/mosaic_1";
+import mosaicScene from "@/assets/js/mosaic";
 
 export default {
   mounted() {
     // on mounted calls the mosaicScene function in mosaic_1.js if canvas is defined
     let canvas = this.$refs.renderCanvas;
-    let assetInput = "mini_mosaic_2.gltf";
+    let assetInput = "mini_mosaic.gltf";
     if (canvas) {
       mosaicScene(canvas, assetInput);
     }
